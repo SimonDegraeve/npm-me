@@ -3,7 +3,7 @@
 [![version](https://img.shields.io/npm/v/simondegraeve.svg?style=flat-square)](https://npm.im/simondegraeve)
 [![MIT License](https://img.shields.io/npm/l/simondegraeve.svg?style=flat-square)](../../LICENCE.md)
 
-![narcissistic](../../images/narcissistic.jpg)
+![narcissistic](https://raw.githubusercontent.com/SimonDegraeve/npm-me/master/images/narcissistic.jpg)
 
 ## Installation
 
