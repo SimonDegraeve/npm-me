@@ -1,15 +1,60 @@
 /**
  *
  */
-module.exports = {
-  name: {
-    first: 'Simon',
-    middle: 'Jean-Baptiste Géry',
-    last: 'Degraeve',
-  },
-  birthday: '1989-08-15',
-  gravatar: 'https://www.gravatar.com/avatar/22b04449c64fd2134055c824e3588f5a',
-  github: 'https://github.com/SimonDegraeve',
-  website: 'https://simondegraeve.github.io',
-  email: 'simon.degraeve@gmail.com',
+var Path = require('path');
+var Fs = require('fs-extra');
+
+
+/**
+ *
+ */
+function getFilePaths(path, callback) {
+  return Fs.walk(path).on('data', function(item) {
+    if (item.stats.isFile()) callback(item.path);
+  });
 }
+
+
+/**
+ *
+ */
+function normalizeData(data, packageName) {
+  return data.replace(/_____pkgName_____/g, packageName);
+}
+
+
+/**
+ *
+ */
+function normalizePath(path, packageName) {
+  return Path.join(__dirname, 'packages', packageName, Path.basename(path, Path.extname(path)));
+}
+
+
+/**
+ *
+ */
+function copyTemplate(packageNames) {
+  var templatePath = Path.join(__dirname, 'templates');
+
+  getFilePaths(templatePath, function(path) {
+    var data = Fs.readFileSync(path, 'utf8');
+
+    packageNames.forEach(function(packageName) {
+      Fs.outputFileSync(
+        normalizePath(path, packageName),
+        normalizeData(data, packageName)
+      );
+    });
+  });
+}
+
+
+/**
+ *
+ */
+copyTemplate([
+  'simon.degraeve',
+  'simon-degraeve',
+  'simondegraeve',
+]);
