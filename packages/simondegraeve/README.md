@@ -5,6 +5,12 @@
 
 ![narcissistic](../../images/narcissistic.jpg)
 
+## Installation
+
+```
+npm install simondegraeve
+```
+
 ## Usage
 
 ```javascript
